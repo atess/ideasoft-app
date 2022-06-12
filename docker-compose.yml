@@ -1,0 +1,92 @@
+# For more information: https://laravel.com/docs/sail
+version: '3'
+services:
+    ideasoft:
+        container_name: 'ideasoft'
+        build:
+            context: ./docker/8.1
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        image: sail-8.1/app
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        ports:
+            - '${APP_PORT:-80}:80'
+            - '${HMR_PORT:-8080}:8080'
+        environment:
+            WWWUSER: '${WWWUSER}'
+            LARAVEL_SAIL: 1
+            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
+            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+        volumes:
+            - '.:/var/www/html'
+        networks:
+            - sail
+        depends_on:
+            - mysql
+            - redis
+    mysql:
+        container_name: 'mysql'
+        image: 'mysql/mysql-server:8.0'
+        ports:
+            - '${FORWARD_DB_PORT:-3306}:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ROOT_HOST: "%"
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+        volumes:
+            - 'sail-mysql:/var/lib/mysql'
+            - './docker/8.1/scripts/create-database.sh:/docker-entrypoint-initdb.d/10-create-database.sh'
+        networks:
+            - sail
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}"]
+            retries: 3
+            timeout: 5s
+    phpmyadmin:
+        image: 'phpmyadmin/phpmyadmin'
+        container_name: 'phpmyadmin'
+        links:
+            - mysql
+        environment:
+            PMA_HOSTS: 'mysql'
+            PMA_PORT: '${PMA_PORT}'
+            PMA_USER: 'root'
+            PMA_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+            PMA_ARBITRARY: '1'
+            MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+            MYSQL_USER: 'root'
+            MYSQL_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+            MAX_EXECUTION_TIME: '0'
+        restart: always
+        depends_on:
+            - mysql
+        networks:
+            - sail
+        ports:
+            - '${PMA_PORT}:80'
+    redis:
+        container_name: 'redis'
+        image: 'redis:alpine'
+        ports:
+            - '${FORWARD_REDIS_PORT:-6379}:6379'
+        volumes:
+            - 'sail-redis:/data'
+        networks:
+            - sail
+        healthcheck:
+            test: ["CMD", "redis-cli", "ping"]
+            retries: 3
+            timeout: 5s
+networks:
+    sail:
+        driver: bridge
+volumes:
+    sail-mysql:
+        driver: local
+    sail-redis:
+        driver: local
