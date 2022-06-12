@@ -93,7 +93,7 @@ bash ./vendor/bin/sail down
 - Domain Driven Design architecture kullanıldı.
 - Service ve Repository katmanları arasına Cache katmanı eklendi. (Redis tagged).
 
-Not: Yeni bir discount rule eklemek için inceleyiniz `src/Support/DiscountHelper.php`
+Not: Yeni bir discount rule eklemek için inceleyiniz `src/Support/DiscountHelper.php` `database/seeders/DiscountSeeder.php`
 
 Tüm endpointlere modelin durumuna göre created_by, updated_by, deleted_by ve timestamps alanları için filtreleme, sıralama ve relation yüklemesi otomatik olarak izin verilen parametrelere eklenmektedir. [spatie/laravel-query-builder](https://github.com/spatie/laravel-query-builder) temel alınmıştır.
 
