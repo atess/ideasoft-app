@@ -8,6 +8,7 @@ use Domain\Product\Contracts\Repositories\ProductRepositoryInterface;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedInclude;
+use Spatie\QueryBuilder\AllowedSort;
 
 class ProductQuery extends BaseQuery
 {
@@ -18,7 +19,9 @@ class ProductQuery extends BaseQuery
         parent::__construct($repository->getBuilder(), $request);
 
         $this
-            ->allowedSorts([])
+            ->allowedSorts([
+                AllowedSort::field('id'),
+            ])
             ->allowedIncludes([
                 AllowedInclude::relationship('category')
             ])

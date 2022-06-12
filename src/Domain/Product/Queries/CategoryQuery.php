@@ -7,6 +7,7 @@ use Base\Concretes\BaseQuery;
 use Domain\Product\Contracts\Repositories\CategoryRepositoryInterface;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\AllowedSort;
 
 class CategoryQuery extends BaseQuery
 {
@@ -17,7 +18,9 @@ class CategoryQuery extends BaseQuery
         parent::__construct($repository->getBuilder(), $request);
 
         $this
-            ->allowedSorts([])
+            ->allowedSorts([
+                AllowedSort::field('id'),
+            ])
             ->allowedIncludes([])
             ->allowedFilters([
                 AllowedFilter::custom('search', new SearchFilter(['name']))

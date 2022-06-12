@@ -20,6 +20,7 @@ class UserQuery extends BaseQuery
         $this
             ->allowedIncludes([])
             ->allowedSorts([
+                AllowedSort::field('id'),
                 AllowedSort::field('name'),
                 AllowedSort::field('email'),
             ])
