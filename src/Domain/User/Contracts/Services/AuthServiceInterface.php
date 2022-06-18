@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\User\Services\Contracts;
+namespace Domain\User\Contracts\Services;
 
 use Domain\User\DataTransferObjects\LoginData;
 use Domain\User\DataTransferObjects\RegisterData;

@@ -2,10 +2,10 @@
 
 namespace Domain\User\Services;
 
+use Domain\User\Contracts\Services\AuthServiceInterface;
+use Domain\User\Contracts\Services\UserServiceInterface;
 use Domain\User\DataTransferObjects\LoginData;
 use Domain\User\DataTransferObjects\RegisterData;
-use Domain\User\Services\Contracts\AuthServiceInterface;
-use Domain\User\Services\Contracts\UserServiceInterface;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\Passport;

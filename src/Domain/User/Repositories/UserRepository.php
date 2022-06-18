@@ -3,8 +3,8 @@
 namespace Domain\User\Repositories;
 
 use Base\Concretes\BaseRepository;
+use Domain\User\Contracts\Repositories\UserRepositoryInterface;
 use Domain\User\Models\User;
-use Domain\User\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface

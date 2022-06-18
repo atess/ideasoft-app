@@ -2,13 +2,13 @@
 
 namespace Domain\User\Providers;
 
+use Domain\User\Contracts\Repositories\UserRepositoryInterface;
+use Domain\User\Contracts\Services\AuthServiceInterface;
+use Domain\User\Contracts\Services\UserServiceInterface;
 use Domain\User\Models\User;
 use Domain\User\Repositories\Caches\UserCacheDecorator;
-use Domain\User\Repositories\Contracts\UserRepositoryInterface;
 use Domain\User\Repositories\UserRepository;
 use Domain\User\Services\AuthService;
-use Domain\User\Services\Contracts\AuthServiceInterface;
-use Domain\User\Services\Contracts\UserServiceInterface;
 use Domain\User\Services\UserService;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;

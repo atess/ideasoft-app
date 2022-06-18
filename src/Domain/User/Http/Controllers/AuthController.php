@@ -3,14 +3,14 @@
 namespace Domain\User\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Domain\User\Contracts\Services\AuthServiceInterface;
+use Domain\User\Contracts\Services\UserServiceInterface;
 use Domain\User\DataTransferObjects\LoginData;
 use Domain\User\DataTransferObjects\RegisterData;
 use Domain\User\Http\Requests\Auth\LoginRequest;
 use Domain\User\Http\Requests\Auth\RegisterRequest;
 use Domain\User\Http\Resources\AuthResource;
 use Domain\User\Http\Resources\UserResource;
-use Domain\User\Services\Contracts\AuthServiceInterface;
-use Domain\User\Services\Contracts\UserServiceInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;

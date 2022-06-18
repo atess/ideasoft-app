@@ -3,13 +3,13 @@
 namespace Domain\User\Http\Controllers;
 
 use Base\Concretes\BaseController;
+use Domain\User\Contracts\Services\UserServiceInterface;
 use Domain\User\DataTransferObjects\UserData;
 use Domain\User\Http\Requests\User\IndexUserRequest;
 use Domain\User\Http\Requests\User\StoreUserRequest;
 use Domain\User\Http\Requests\User\UpdateUserRequest;
 use Domain\User\Http\Resources\UserResource;
 use Domain\User\Models\User;
-use Domain\User\Services\Contracts\UserServiceInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;

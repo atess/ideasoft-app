@@ -2,7 +2,7 @@
 namespace Domain\User\Repositories\Caches;
 
 use Base\Concretes\BaseCacheDecorator;
-use Domain\User\Repositories\Contracts\UserRepositoryInterface;
+use Domain\User\Contracts\Repositories\UserRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class UserCacheDecorator extends BaseCacheDecorator implements UserRepositoryInterface

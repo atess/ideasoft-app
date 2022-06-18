@@ -4,8 +4,8 @@ namespace Domain\User\Queries;
 
 use App\Http\Queries\Filters\SearchFilter;
 use Base\Concretes\BaseQuery;
+use Domain\User\Contracts\Repositories\UserRepositoryInterface;
 use Domain\User\Http\Requests\User\IndexUserRequest;
-use Domain\User\Repositories\Contracts\UserRepositoryInterface;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedSort;
 
